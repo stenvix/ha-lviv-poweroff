@@ -9,7 +9,7 @@ from .const import PowerOffGroup
 from .entities import PowerOffPeriod
 
 URL = "https://lviv.energy-ua.info/grupa/{}"
-
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 class EnergyUaScrapper:
     """Class for scraping power off periods from the Energy UA website."""
@@ -20,7 +20,7 @@ class EnergyUaScrapper:
 
     async def validate(self) -> bool:
         async with (
-            aiohttp.ClientSession() as session,
+            aiohttp.ClientSession(headers={"User-Agent": USER_AGENT}) as session,
             session.get(URL.format(self.group)) as response,
         ):
             return response.status == 200
@@ -44,7 +44,7 @@ class EnergyUaScrapper:
 
     async def get_power_off_periods(self) -> list[PowerOffPeriod]:
         async with (
-            aiohttp.ClientSession() as session,
+            aiohttp.ClientSession(headers={"User-Agent": USER_AGENT}) as session,
             session.get(URL.format(self.group)) as response,
         ):
             content = await response.text()
