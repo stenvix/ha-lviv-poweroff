@@ -38,6 +38,10 @@ class LvivPowerOffCoordinator(DataUpdateCoordinator):
         self.api = EnergyUaScrapper(self.group)
         self.periods: list[PowerOffPeriod] = []
 
+    async def _async_setup(self):
+        LOGGER.info("_async_setup(self)")
+        await self._fetch_periods()
+
     async def _async_update_data(self) -> dict:
         """Fetch power off periods from scrapper."""
         try:
