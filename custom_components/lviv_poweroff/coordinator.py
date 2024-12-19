@@ -30,6 +30,7 @@ class LvivPowerOffCoordinator(DataUpdateCoordinator):
             LOGGER,
             name=DOMAIN,
             update_interval=timedelta(seconds=UPDATE_INTERVAL),
+            always_update=True
         )
         self.hass = hass
         self.config_entry = config_entry
