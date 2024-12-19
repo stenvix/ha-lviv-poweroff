@@ -39,7 +39,7 @@ class LvivPowerOffCoordinator(DataUpdateCoordinator):
         self.periods: list[PowerOffPeriod] = []
 
     async def _async_setup(self):
-        LOGGER.info("_async_setup(self)")
+        LOGGER.info("_async_setup")
         await self._fetch_periods()
 
     async def _async_update_data(self) -> dict:

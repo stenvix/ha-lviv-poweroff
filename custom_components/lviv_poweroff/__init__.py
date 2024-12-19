@@ -1,5 +1,4 @@
 """The Lviv Power Offline integration."""
-
 from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
@@ -8,11 +7,15 @@ from homeassistant.core import HomeAssistant
 
 from .coordinator import LvivPowerOffCoordinator
 
+import logging
+
 PLATFORMS: list[Platform] = [Platform.CALENDAR, Platform.SENSOR]
 
+LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Lviv Power Offline from a config entry."""
+    LOGGER.info("async_setup_entry")
     coordinator = LvivPowerOffCoordinator(hass, entry)
     await coordinator.async_config_entry_first_refresh()
 
