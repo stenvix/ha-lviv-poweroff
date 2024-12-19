@@ -41,6 +41,7 @@ class LvivPowerOffCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self) -> dict:
         """Fetch power off periods from scrapper."""
         try:
+            LOGGER.info("Fetch power off periods")
             await self._fetch_periods()
             return {}  # noqa: TRY300
         except Exception as err:
